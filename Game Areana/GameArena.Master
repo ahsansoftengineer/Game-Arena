@@ -1,0 +1,90 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="GameArena.master.cs" Inherits="Game_Areana.GameArena" %>
+
+<!DOCTYPE html>
+<html>
+<head runat="server">
+  <title>Game Arena</title>
+  <link href="CSS/bootstrap.min.css" rel="stylesheet" />
+  <link href="CSS/Custome.css" rel="stylesheet" />
+</head>
+<body class="container">
+  <form id="form1" runat="server">
+    <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+    <%-- Navigation Start --%>
+    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+      <ContentTemplate>
+        <nav class="navbar navbar-expand-md fixed-top bg-danger">
+          <a class="navbar-brand" href="./Category.aspx">Game Arena</a>
+          <button class="navbar-toggler text-dark d-sm-block d-md-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon">_</span>
+          </button>
+          <div class="collapse navbar-collapse" style="padding-left: 30px" id="collapsibleNavId">
+            <ul class="navbar-nav">
+              <asp:Repeater ID="rptrNaviation" runat="server" OnItemCommand="rptrNaviation_ItemCommand" OnItemDataBound="rptrNaviation_ItemDataBound">
+                <ItemTemplate>
+                  <li class="nav-item">
+                    <asp:LinkButton CssClass="nav-link" ID="lbNavItem" runat="server"></asp:LinkButton>
+                  </li>
+                </ItemTemplate>
+              </asp:Repeater>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" style="color: yellow" href="#" id="dropdownIds" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">More Games</a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="dropdownIds">
+                  <asp:Repeater ID="rptrDropDown" OnItemCommand="rptrNaviation_ItemCommand" runat="server" OnItemDataBound="rptrDropDown_ItemDataBound">
+                    <ItemTemplate>
+                      <asp:LinkButton CssClass="dropdown-item" ID="lbNavItem" runat="server"></asp:LinkButton>
+                    </ItemTemplate>
+                  </asp:Repeater>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </ContentTemplate>
+    </asp:UpdatePanel>
+    <!-- Navigation End -->
+    <%--Content Start--%>
+    <div class="row">
+      <div class="col-12 mt-5">
+        <div class="row pt-3" style="background-color: darkslategray">
+          <asp:Panel ID="pnlSearch" CssClass="col-xs-12 col-sm-12 col-md-12 col-lg-12" runat="server">
+            <asp:ContentPlaceHolder ID="cphSearchPaging" runat="server"></asp:ContentPlaceHolder>
+          </asp:Panel>
+          <!-- Content Area Start -->
+          <asp:Panel ID="pnlContentArea" CssClass="col-xs-12 col-sm-12 col-md-8 col-lg-8" runat="server">
+            <asp:ContentPlaceHolder ID="cphContent" runat="server"></asp:ContentPlaceHolder>
+          </asp:Panel>
+          <!-- Advertisement -->
+          <asp:Panel ID="pnlAdvertisement" CssClass="col-xs-12 col-sm-12 col-md-4 col-lg-4 pt-0" runat="server">
+            <div class="imgAdsBox">
+              <asp:AdRotator CssClass="img-thumbnail image" ID="AdRotator1" runat="server" />
+            </div>
+            <div class="imgAdsBox">
+              <asp:AdRotator CssClass="img-thumbnail image" ID="AdRotator2" runat="server" />
+            </div>
+            <div class="imgAdsBox">
+              <asp:AdRotator CssClass="img-thumbnail image" ID="AdRotator3" runat="server" />
+            </div>
+            <div class="imgAdsBox">
+              <asp:AdRotator CssClass="img-thumbnail image" ID="AdRotator4" runat="server" />
+            </div>
+          </asp:Panel>
+        </div>
+      </div>
+    </div>
+    <!-- Content End -->
+    <!-- Forget This Area -->
+    <div class="row ">
+      <div class="col-12 sitemaps mt-3 yellow ">
+        <div class="col-12 ">
+          <p style="text-align: center;">Copy Right&copy; Muhammad&reg; Ahsan&TRADE;</p>
+        </div>
+      </div>
+    </div>
+    <%-- Footer End --%>
+  </form>
+</body>
+<script src="JS/jquery-3.3.1.min.js"></script>
+<script src="JS/bootstrap.min.js"></script>
+<script src="JS/popper.js"></script>
+</html>

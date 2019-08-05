@@ -1,0 +1,734 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Games_Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Game_Images">
+          <Key>
+            <PropertyRef Name="Game_ID" />
+          </Key>
+          <Property Name="Game_ID" Type="int" Nullable="false" />
+          <Property Name="Large_Image_1" Type="varbinary(max)" />
+          <Property Name="Large_Image_2" Type="varbinary(max)" />
+          <Property Name="Large_Image_3" Type="varbinary(max)" />
+          <Property Name="Large_Image_4" Type="varbinary(max)" />
+          <Property Name="Small_Image" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="Game_ID" />
+          </Key>
+          <Property Name="Game_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Game_Full_Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Game_Short_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Release_Date" Type="datetime" />
+          <Property Name="Company" Type="nvarchar" MaxLength="50" />
+          <Property Name="Upload_Date" Type="datetime" />
+          <Property Name="Game_Type" Type="nvarchar" MaxLength="100" />
+          <Property Name="Min_Spc_ID" Type="int" Nullable="false" />
+          <Property Name="Rec_Spc_ID" Type="int" Nullable="false" />
+          <Property Name="Primary_Comment" Type="nvarchar" MaxLength="150" />
+          <Property Name="Warnings" Type="nvarchar" MaxLength="150" />
+          <Property Name="Developer_Comment_1" Type="nvarchar" MaxLength="500" />
+          <Property Name="Developer_Comment_2" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="ResetPasswordRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="User_ID" Type="int" Nullable="false" />
+          <Property Name="RestRequestDateTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Specifications">
+          <Key>
+            <PropertyRef Name="Specification_ID" />
+          </Key>
+          <Property Name="Specification_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OS" Type="nvarchar" MaxLength="150" />
+          <Property Name="Processor" Type="nvarchar" MaxLength="50" />
+          <Property Name="Memory" Type="nvarchar" MaxLength="50" />
+          <Property Name="Graphics" Type="nvarchar" MaxLength="50" />
+          <Property Name="DirectX" Type="nvarchar" MaxLength="50" />
+          <Property Name="Storage" Type="nvarchar" MaxLength="80" />
+          <Property Name="Sound_Card" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Game Arena.dbo.Specifications_Technical' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Specifications_Technical">
+          <Key>
+            <PropertyRef Name="Game_ID" />
+          </Key>
+          <Property Name="Game_ID" Type="int" Nullable="false" />
+          <Property Name="Game_Version" Type="nvarchar" MaxLength="150" />
+          <Property Name="Interface_Language" Type="nvarchar" MaxLength="50" />
+          <Property Name="Audio_Language" Type="nvarchar" MaxLength="50" />
+          <Property Name="Uploader" Type="nvarchar" MaxLength="50" />
+          <Property Name="Game_File_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Game_Download_Size" Type="nvarchar" MaxLength="80" />
+          <Property Name="MDSSUM" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Email_Address" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="First_Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_Name" Type="nvarchar" MaxLength="50" />
+          <Property Name="Secret_Question" Type="nvarchar" MaxLength="50" />
+          <Property Name="Secret_Answer" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Gmail" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="200" />
+          <Property Name="Retry_Attempts" Type="int" />
+          <Property Name="IsLocked" Type="bit" />
+          <Property Name="LockedDateTime" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_Game_Images_Games">
+          <End Role="Games" Type="Self.Games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Game_Images" Type="Self.Game_Images" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="Game_ID" />
+            </Principal>
+            <Dependent Role="Game_Images">
+              <PropertyRef Name="Game_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Specifications_Minimum">
+          <End Role="Specifications" Type="Self.Specifications" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specifications">
+              <PropertyRef Name="Specification_ID" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="Min_Spc_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Specifications_Recomended">
+          <End Role="Specifications" Type="Self.Specifications" Multiplicity="1" />
+          <End Role="Games" Type="Self.Games" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specifications">
+              <PropertyRef Name="Specification_ID" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="Rec_Spc_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResetPasswordRequest_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="ResetPasswordRequest" Type="Self.ResetPasswordRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="ResetPasswordRequest">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Specifications_Technical_Games">
+          <End Role="Games" Type="Self.Games" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Specifications_Technical" Type="Self.Specifications_Technical" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="Game_ID" />
+            </Principal>
+            <Dependent Role="Specifications_Technical">
+              <PropertyRef Name="Game_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Delete_Games" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Game_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Delete_Specifications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Specification_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="Insert_Games" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Game_Full_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Game_Short_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Release_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Company" Type="nvarchar" Mode="In" />
+          <Parameter Name="Upload_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Min_Spc_ID" Type="int" Mode="In" />
+          <Parameter Name="Rec_Spc_ID" Type="int" Mode="In" />
+          <Parameter Name="Game_Type" Type="nvarchar" Mode="In" />
+          <Parameter Name="Primary_Comment" Type="nvarchar" Mode="In" />
+          <Parameter Name="Warnings" Type="nvarchar" Mode="In" />
+          <Parameter Name="Developer_Comment_1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Developer_Comment_2" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Insert_Specifications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Specification_ID" Type="int" Mode="In" />
+          <Parameter Name="OS" Type="nvarchar" Mode="In" />
+          <Parameter Name="Processor" Type="nvarchar" Mode="In" />
+          <Parameter Name="Memory" Type="nvarchar" Mode="In" />
+          <Parameter Name="Graphics" Type="nvarchar" Mode="In" />
+          <Parameter Name="DirectX" Type="nvarchar" Mode="In" />
+          <Parameter Name="Storage" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sound_Card" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Update_Game_Images" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Game_ID" Type="int" Mode="In" />
+          <Parameter Name="Large_Image_1" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Large_Image_2" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Large_Image_3" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Large_Image_4" Type="varbinary(max)" Mode="In" />
+          <Parameter Name="Small_Image" Type="varbinary(max)" Mode="In" />
+        </Function>
+        <Function Name="Update_Games" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Game_ID" Type="int" Mode="In" />
+          <Parameter Name="Game_Full_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Game_Short_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Release_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Company" Type="nvarchar" Mode="In" />
+          <Parameter Name="Upload_Date" Type="datetime" Mode="In" />
+          <Parameter Name="Min_Spc_ID" Type="int" Mode="In" />
+          <Parameter Name="Rec_Spc_ID" Type="int" Mode="In" />
+          <Parameter Name="Game_Type" Type="nvarchar" Mode="In" />
+          <Parameter Name="Primary_Comment" Type="nvarchar" Mode="In" />
+          <Parameter Name="Warnings" Type="nvarchar" Mode="In" />
+          <Parameter Name="Developer_Comment_1" Type="nvarchar" Mode="In" />
+          <Parameter Name="Developer_Comment_2" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Update_Specifications" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Specification_ID" Type="int" Mode="In" />
+          <Parameter Name="OS" Type="nvarchar" Mode="In" />
+          <Parameter Name="Processor" Type="nvarchar" Mode="In" />
+          <Parameter Name="Memory" Type="nvarchar" Mode="In" />
+          <Parameter Name="Graphics" Type="nvarchar" Mode="In" />
+          <Parameter Name="DirectX" Type="nvarchar" Mode="In" />
+          <Parameter Name="Storage" Type="nvarchar" Mode="In" />
+          <Parameter Name="Sound_Card" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="Update_Specifications_Technical" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Game_ID" Type="int" Mode="In" />
+          <Parameter Name="Game_Version" Type="nvarchar" Mode="In" />
+          <Parameter Name="Interface_Language" Type="nvarchar" Mode="In" />
+          <Parameter Name="Audio_Language" Type="nvarchar" Mode="In" />
+          <Parameter Name="Uploader" Type="nvarchar" Mode="In" />
+          <Parameter Name="Game_File_Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Game_Download_Size" Type="nvarchar" Mode="In" />
+          <Parameter Name="MDSSUM" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="Games_ModelStoreContainer">
+          <EntitySet Name="Game_Images" EntityType="Self.Game_Images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ResetPasswordRequest" EntityType="Self.ResetPasswordRequest" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specifications" EntityType="Self.Specifications" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Specifications_Technical" EntityType="Self.Specifications_Technical" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+[Specifications_Technical].[Game_ID] AS [Game_ID], 
+[Specifications_Technical].[Game_Version] AS [Game_Version], 
+[Specifications_Technical].[Interface_Language] AS [Interface_Language], 
+[Specifications_Technical].[Audio_Language] AS [Audio_Language], 
+[Specifications_Technical].[Uploader] AS [Uploader], 
+[Specifications_Technical].[Game_File_Name] AS [Game_File_Name], 
+[Specifications_Technical].[Game_Download_Size] AS [Game_Download_Size], 
+[Specifications_Technical].[MDSSUM] AS [MDSSUM]
+FROM [dbo].[Specifications_Technical] AS [Specifications_Technical]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Game_Images_Games" Association="Self.FK_Game_Images_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Game_Images" EntitySet="Game_Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Specifications_Minimum" Association="Self.FK_Games_Specifications_Minimum">
+            <End Role="Specifications" EntitySet="Specifications" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Specifications_Recomended" Association="Self.FK_Games_Specifications_Recomended">
+            <End Role="Specifications" EntitySet="Specifications" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResetPasswordRequest_Users" Association="Self.FK_ResetPasswordRequest_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ResetPasswordRequest" EntitySet="ResetPasswordRequest" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Specifications_Technical_Games" Association="Self.FK_Specifications_Technical_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Specifications_Technical" EntitySet="Specifications_Technical" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Games_Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Game_Images">
+          <Key>
+            <PropertyRef Name="Game_ID" />
+          </Key>
+          <Property Name="Game_ID" Type="Int32" Nullable="false" />
+          <Property Name="Large_Image_1" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Large_Image_2" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Large_Image_3" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Large_Image_4" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="Small_Image" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="Game" Relationship="Self.FK_Game_Images_Games" FromRole="Game_Images" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="Game">
+          <Key>
+            <PropertyRef Name="Game_ID" />
+          </Key>
+          <Property Name="Game_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Game_Full_Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Game_Short_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Release_Date" Type="DateTime" Precision="3" />
+          <Property Name="Company" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Upload_Date" Type="DateTime" Precision="3" />
+          <Property Name="Game_Type" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Min_Spc_ID" Type="Int32" Nullable="false" />
+          <Property Name="Rec_Spc_ID" Type="Int32" Nullable="false" />
+          <Property Name="Primary_Comment" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Warnings" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Developer_Comment_1" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="Developer_Comment_2" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Game_Images" Relationship="Self.FK_Game_Images_Games" FromRole="Games" ToRole="Game_Images" />
+          <NavigationProperty Name="Min_Spc" Relationship="Self.FK_Games_Specifications_Minimum" FromRole="Games" ToRole="Specifications" />
+          <NavigationProperty Name="Rec_Spc" Relationship="Self.FK_Games_Specifications_Recomended" FromRole="Games" ToRole="Specifications" />
+          <NavigationProperty Name="Tech_Spc" Relationship="Self.FK_Specifications_Technical_Games" FromRole="Games" ToRole="Specifications_Technical" />
+        </EntityType>
+        <EntityType Name="ResetPasswordRequest">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Guid" Nullable="false" />
+          <Property Name="User_ID" Type="Int32" Nullable="false" />
+          <Property Name="RestRequestDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="User" Relationship="Self.FK_ResetPasswordRequest_Users" FromRole="ResetPasswordRequest" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="Specification">
+          <Key>
+            <PropertyRef Name="Specification_ID" />
+          </Key>
+          <Property Name="Specification_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OS" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Processor" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Memory" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Graphics" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DirectX" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Storage" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="Sound_Card" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Min_Games" Relationship="Self.FK_Games_Specifications_Minimum" FromRole="Specifications" ToRole="Games" />
+          <NavigationProperty Name="Rec_Games" Relationship="Self.FK_Games_Specifications_Recomended" FromRole="Specifications" ToRole="Games" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="User_ID" />
+          </Key>
+          <Property Name="User_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Email_Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="First_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Last_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Secret_Question" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Secret_Answer" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Gmail" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="Retry_Attempts" Type="Int32" />
+          <Property Name="IsLocked" Type="Boolean" />
+          <Property Name="LockedDateTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="ResetPasswordRequests" Relationship="Self.FK_ResetPasswordRequest_Users" FromRole="Users" ToRole="ResetPasswordRequest" />
+        </EntityType>
+        <EntityType Name="Specifications_Technical">
+          <Key>
+            <PropertyRef Name="Game_ID" />
+          </Key>
+          <Property Name="Game_ID" Type="Int32" Nullable="false" />
+          <Property Name="Game_Version" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Interface_Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Audio_Language" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Uploader" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Game_File_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Game_Download_Size" Type="String" MaxLength="80" FixedLength="false" Unicode="true" />
+          <Property Name="MDSSUM" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Game" Relationship="Self.FK_Specifications_Technical_Games" FromRole="Specifications_Technical" ToRole="Games" />
+        </EntityType>
+        <Association Name="FK_Game_Images_Games">
+          <End Role="Games" Type="Self.Game" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Game_Images" Type="Self.Game_Images" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="Game_ID" />
+            </Principal>
+            <Dependent Role="Game_Images">
+              <PropertyRef Name="Game_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Specifications_Minimum">
+          <End Role="Specifications" Type="Self.Specification" Multiplicity="1" />
+          <End Role="Games" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specifications">
+              <PropertyRef Name="Specification_ID" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="Min_Spc_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Games_Specifications_Recomended">
+          <End Role="Specifications" Type="Self.Specification" Multiplicity="1" />
+          <End Role="Games" Type="Self.Game" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Specifications">
+              <PropertyRef Name="Specification_ID" />
+            </Principal>
+            <Dependent Role="Games">
+              <PropertyRef Name="Rec_Spc_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Specifications_Technical_Games">
+          <End Role="Games" Type="Self.Game" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Specifications_Technical" Type="Self.Specifications_Technical" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Games">
+              <PropertyRef Name="Game_ID" />
+            </Principal>
+            <Dependent Role="Specifications_Technical">
+              <PropertyRef Name="Game_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ResetPasswordRequest_Users">
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
+          <End Role="ResetPasswordRequest" Type="Self.ResetPasswordRequest" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="User_ID" />
+            </Principal>
+            <Dependent Role="ResetPasswordRequest">
+              <PropertyRef Name="User_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Games_Arena_DB_Context" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Game_Images" EntityType="Self.Game_Images" />
+          <EntitySet Name="Games" EntityType="Self.Game" />
+          <EntitySet Name="ResetPasswordRequests" EntityType="Self.ResetPasswordRequest" />
+          <EntitySet Name="Specifications" EntityType="Self.Specification" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <EntitySet Name="Specifications_Technical" EntityType="Self.Specifications_Technical" />
+          <AssociationSet Name="FK_Game_Images_Games" Association="Self.FK_Game_Images_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Game_Images" EntitySet="Game_Images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Specifications_Minimum" Association="Self.FK_Games_Specifications_Minimum">
+            <End Role="Specifications" EntitySet="Specifications" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Games_Specifications_Recomended" Association="Self.FK_Games_Specifications_Recomended">
+            <End Role="Specifications" EntitySet="Specifications" />
+            <End Role="Games" EntitySet="Games" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Specifications_Technical_Games" Association="Self.FK_Specifications_Technical_Games">
+            <End Role="Games" EntitySet="Games" />
+            <End Role="Specifications_Technical" EntitySet="Specifications_Technical" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ResetPasswordRequest_Users" Association="Self.FK_ResetPasswordRequest_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="ResetPasswordRequest" EntitySet="ResetPasswordRequests" />
+          </AssociationSet>
+          <FunctionImport Name="Delete_Games">
+          <Parameter Name="Game_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Delete_Specifications">
+          <Parameter Name="Specification_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Games">
+            <Parameter Name="Game_Full_Name" Mode="In" Type="String" />
+            <Parameter Name="Game_Short_Name" Mode="In" Type="String" />
+            <Parameter Name="Release_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Company" Mode="In" Type="String" />
+            <Parameter Name="Upload_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Min_Spc_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Rec_Spc_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Game_Type" Mode="In" Type="String" />
+            <Parameter Name="Primary_Comment" Mode="In" Type="String" />
+            <Parameter Name="Warnings" Mode="In" Type="String" />
+            <Parameter Name="Developer_Comment_1" Mode="In" Type="String" />
+            <Parameter Name="Developer_Comment_2" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Insert_Specifications">
+            <Parameter Name="Specification_ID" Mode="In" Type="Int32" />
+            <Parameter Name="OS" Mode="In" Type="String" />
+            <Parameter Name="Processor" Mode="In" Type="String" />
+            <Parameter Name="Memory" Mode="In" Type="String" />
+            <Parameter Name="Graphics" Mode="In" Type="String" />
+            <Parameter Name="DirectX" Mode="In" Type="String" />
+            <Parameter Name="Storage" Mode="In" Type="String" />
+            <Parameter Name="Sound_Card" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Game_Images">
+            <Parameter Name="Game_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Large_Image_1" Mode="In" Type="Binary" />
+            <Parameter Name="Large_Image_2" Mode="In" Type="Binary" />
+            <Parameter Name="Large_Image_3" Mode="In" Type="Binary" />
+            <Parameter Name="Large_Image_4" Mode="In" Type="Binary" />
+            <Parameter Name="Small_Image" Mode="In" Type="Binary" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Games">
+            <Parameter Name="Game_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Game_Full_Name" Mode="In" Type="String" />
+            <Parameter Name="Game_Short_Name" Mode="In" Type="String" />
+            <Parameter Name="Release_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Company" Mode="In" Type="String" />
+            <Parameter Name="Upload_Date" Mode="In" Type="DateTime" />
+            <Parameter Name="Min_Spc_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Rec_Spc_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Game_Type" Mode="In" Type="String" />
+            <Parameter Name="Primary_Comment" Mode="In" Type="String" />
+            <Parameter Name="Warnings" Mode="In" Type="String" />
+            <Parameter Name="Developer_Comment_1" Mode="In" Type="String" />
+            <Parameter Name="Developer_Comment_2" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Specifications">
+            <Parameter Name="Specification_ID" Mode="In" Type="Int32" />
+            <Parameter Name="OS" Mode="In" Type="String" />
+            <Parameter Name="Processor" Mode="In" Type="String" />
+            <Parameter Name="Memory" Mode="In" Type="String" />
+            <Parameter Name="Graphics" Mode="In" Type="String" />
+            <Parameter Name="DirectX" Mode="In" Type="String" />
+            <Parameter Name="Storage" Mode="In" Type="String" />
+            <Parameter Name="Sound_Card" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="Update_Specifications_Technical">
+            <Parameter Name="Game_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Game_Version" Mode="In" Type="String" />
+            <Parameter Name="Interface_Language" Mode="In" Type="String" />
+            <Parameter Name="Audio_Language" Mode="In" Type="String" />
+            <Parameter Name="Uploader" Mode="In" Type="String" />
+            <Parameter Name="Game_File_Name" Mode="In" Type="String" />
+            <Parameter Name="Game_Download_Size" Mode="In" Type="String" />
+            <Parameter Name="MDSSUM" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Games_ModelStoreContainer" CdmEntityContainer="Games_Arena_DB_Context">
+          <EntitySetMapping Name="Game_Images">
+            <EntityTypeMapping TypeName="Games_Model.Game_Images">
+              <MappingFragment StoreEntitySet="Game_Images">
+                <ScalarProperty Name="Game_ID" ColumnName="Game_ID" />
+                <ScalarProperty Name="Large_Image_1" ColumnName="Large_Image_1" />
+                <ScalarProperty Name="Large_Image_2" ColumnName="Large_Image_2" />
+                <ScalarProperty Name="Large_Image_3" ColumnName="Large_Image_3" />
+                <ScalarProperty Name="Large_Image_4" ColumnName="Large_Image_4" />
+                <ScalarProperty Name="Small_Image" ColumnName="Small_Image" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="Games_Model.Game_Images">
+              <ModificationFunctionMapping>
+                <UpdateFunction FunctionName="Games_Model.Store.Update_Game_Images">
+                  <ScalarProperty Name="Small_Image" ParameterName="Small_Image" Version="Current" />
+                  <ScalarProperty Name="Large_Image_4" ParameterName="Large_Image_4" Version="Current" />
+                  <ScalarProperty Name="Large_Image_3" ParameterName="Large_Image_3" Version="Current" />
+                  <ScalarProperty Name="Large_Image_2" ParameterName="Large_Image_2" Version="Current" />
+                  <ScalarProperty Name="Large_Image_1" ParameterName="Large_Image_1" Version="Current" />
+                  <ScalarProperty Name="Game_ID" ParameterName="Game_ID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="Games_Model.Game">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="Game_ID" ColumnName="Game_ID" />
+                <ScalarProperty Name="Game_Full_Name" ColumnName="Game_Full_Name" />
+                <ScalarProperty Name="Game_Short_Name" ColumnName="Game_Short_Name" />
+                <ScalarProperty Name="Release_Date" ColumnName="Release_Date" />
+                <ScalarProperty Name="Company" ColumnName="Company" />
+                <ScalarProperty Name="Upload_Date" ColumnName="Upload_Date" />
+                <ScalarProperty Name="Game_Type" ColumnName="Game_Type" />
+                <ScalarProperty Name="Min_Spc_ID" ColumnName="Min_Spc_ID" />
+                <ScalarProperty Name="Rec_Spc_ID" ColumnName="Rec_Spc_ID" />
+                <ScalarProperty Name="Primary_Comment" ColumnName="Primary_Comment" />
+                <ScalarProperty Name="Warnings" ColumnName="Warnings" />
+                <ScalarProperty Name="Developer_Comment_1" ColumnName="Developer_Comment_1" />
+                <ScalarProperty Name="Developer_Comment_2" ColumnName="Developer_Comment_2" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="Games_Model.Game">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="Games_Model.Store.Insert_Games">
+                  <ScalarProperty Name="Developer_Comment_2" ParameterName="Developer_Comment_2" />
+                  <ScalarProperty Name="Developer_Comment_1" ParameterName="Developer_Comment_1" />
+                  <ScalarProperty Name="Warnings" ParameterName="Warnings" />
+                  <ScalarProperty Name="Primary_Comment" ParameterName="Primary_Comment" />
+                  <ScalarProperty Name="Game_Type" ParameterName="Game_Type" />
+                  <ScalarProperty Name="Rec_Spc_ID" ParameterName="Rec_Spc_ID" />
+                  <ScalarProperty Name="Min_Spc_ID" ParameterName="Min_Spc_ID" />
+                  <ScalarProperty Name="Upload_Date" ParameterName="Upload_Date" />
+                  <ScalarProperty Name="Company" ParameterName="Company" />
+                  <ScalarProperty Name="Release_Date" ParameterName="Release_Date" />
+                  <ScalarProperty Name="Game_Short_Name" ParameterName="Game_Short_Name" />
+                  <ScalarProperty Name="Game_Full_Name" ParameterName="Game_Full_Name" />
+                </InsertFunction>
+                <UpdateFunction FunctionName="Games_Model.Store.Update_Games">
+                  <ScalarProperty Name="Developer_Comment_2" ParameterName="Developer_Comment_2" Version="Current" />
+                  <ScalarProperty Name="Developer_Comment_1" ParameterName="Developer_Comment_1" Version="Current" />
+                  <ScalarProperty Name="Warnings" ParameterName="Warnings" Version="Current" />
+                  <ScalarProperty Name="Primary_Comment" ParameterName="Primary_Comment" Version="Current" />
+                  <ScalarProperty Name="Game_Type" ParameterName="Game_Type" Version="Current" />
+                  <ScalarProperty Name="Rec_Spc_ID" ParameterName="Rec_Spc_ID" Version="Current" />
+                  <ScalarProperty Name="Min_Spc_ID" ParameterName="Min_Spc_ID" Version="Current" />
+                  <ScalarProperty Name="Upload_Date" ParameterName="Upload_Date" Version="Current" />
+                  <ScalarProperty Name="Company" ParameterName="Company" Version="Current" />
+                  <ScalarProperty Name="Release_Date" ParameterName="Release_Date" Version="Current" />
+                  <ScalarProperty Name="Game_Short_Name" ParameterName="Game_Short_Name" Version="Current" />
+                  <ScalarProperty Name="Game_Full_Name" ParameterName="Game_Full_Name" Version="Current" />
+                  <ScalarProperty Name="Game_ID" ParameterName="Game_ID" Version="Current" />
+                </UpdateFunction>
+                <DeleteFunction FunctionName="Games_Model.Store.Delete_Games">
+                  <ScalarProperty Name="Game_ID" ParameterName="Game_ID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ResetPasswordRequests">
+            <EntityTypeMapping TypeName="Games_Model.ResetPasswordRequest">
+              <MappingFragment StoreEntitySet="ResetPasswordRequest">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="RestRequestDateTime" ColumnName="RestRequestDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specifications">
+            <EntityTypeMapping TypeName="Games_Model.Specification">
+              <MappingFragment StoreEntitySet="Specifications">
+                <ScalarProperty Name="Specification_ID" ColumnName="Specification_ID" />
+                <ScalarProperty Name="OS" ColumnName="OS" />
+                <ScalarProperty Name="Processor" ColumnName="Processor" />
+                <ScalarProperty Name="Memory" ColumnName="Memory" />
+                <ScalarProperty Name="Graphics" ColumnName="Graphics" />
+                <ScalarProperty Name="DirectX" ColumnName="DirectX" />
+                <ScalarProperty Name="Storage" ColumnName="Storage" />
+                <ScalarProperty Name="Sound_Card" ColumnName="Sound_Card" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="Games_Model.Specification">
+              <ModificationFunctionMapping>
+                <UpdateFunction FunctionName="Games_Model.Store.Update_Specifications">
+                  <ScalarProperty Name="Sound_Card" ParameterName="Sound_Card" Version="Current" />
+                  <ScalarProperty Name="Storage" ParameterName="Storage" Version="Current" />
+                  <ScalarProperty Name="DirectX" ParameterName="DirectX" Version="Current" />
+                  <ScalarProperty Name="Graphics" ParameterName="Graphics" Version="Current" />
+                  <ScalarProperty Name="Memory" ParameterName="Memory" Version="Current" />
+                  <ScalarProperty Name="Processor" ParameterName="Processor" Version="Current" />
+                  <ScalarProperty Name="OS" ParameterName="OS" Version="Current" />
+                  <ScalarProperty Name="Specification_ID" ParameterName="Specification_ID" Version="Current" />
+                </UpdateFunction>
+                <InsertFunction FunctionName="Games_Model.Store.Insert_Specifications">
+                  <ScalarProperty Name="Sound_Card" ParameterName="Sound_Card" />
+                  <ScalarProperty Name="Storage" ParameterName="Storage" />
+                  <ScalarProperty Name="DirectX" ParameterName="DirectX" />
+                  <ScalarProperty Name="Graphics" ParameterName="Graphics" />
+                  <ScalarProperty Name="Memory" ParameterName="Memory" />
+                  <ScalarProperty Name="Processor" ParameterName="Processor" />
+                  <ScalarProperty Name="OS" ParameterName="OS" />
+                  <ScalarProperty Name="Specification_ID" ParameterName="Specification_ID" />
+                </InsertFunction>
+                <DeleteFunction FunctionName="Games_Model.Store.Delete_Specifications">
+                  <ScalarProperty Name="Specification_ID" ParameterName="Specification_ID" />
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="Games_Model.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="User_ID" ColumnName="User_ID" />
+                <ScalarProperty Name="Email_Address" ColumnName="Email_Address" />
+                <ScalarProperty Name="First_Name" ColumnName="First_Name" />
+                <ScalarProperty Name="Last_Name" ColumnName="Last_Name" />
+                <ScalarProperty Name="Secret_Question" ColumnName="Secret_Question" />
+                <ScalarProperty Name="Secret_Answer" ColumnName="Secret_Answer" />
+                <ScalarProperty Name="Gmail" ColumnName="Gmail" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Retry_Attempts" ColumnName="Retry_Attempts" />
+                <ScalarProperty Name="IsLocked" ColumnName="IsLocked" />
+                <ScalarProperty Name="LockedDateTime" ColumnName="LockedDateTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Specifications_Technical">
+            <EntityTypeMapping TypeName="Games_Model.Specifications_Technical">
+              <MappingFragment StoreEntitySet="Specifications_Technical">
+                <ScalarProperty Name="Game_ID" ColumnName="Game_ID" />
+                <ScalarProperty Name="Game_Version" ColumnName="Game_Version" />
+                <ScalarProperty Name="Interface_Language" ColumnName="Interface_Language" />
+                <ScalarProperty Name="Audio_Language" ColumnName="Audio_Language" />
+                <ScalarProperty Name="Uploader" ColumnName="Uploader" />
+                <ScalarProperty Name="Game_File_Name" ColumnName="Game_File_Name" />
+                <ScalarProperty Name="Game_Download_Size" ColumnName="Game_Download_Size" />
+                <ScalarProperty Name="MDSSUM" ColumnName="MDSSUM" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="Games_Model.Specifications_Technical">
+              <ModificationFunctionMapping>
+                <UpdateFunction FunctionName="Games_Model.Store.Update_Specifications_Technical">
+                  <ScalarProperty Name="MDSSUM" ParameterName="MDSSUM" Version="Current" />
+                  <ScalarProperty Name="Game_Download_Size" ParameterName="Game_Download_Size" Version="Current" />
+                  <ScalarProperty Name="Game_File_Name" ParameterName="Game_File_Name" Version="Current" />
+                  <ScalarProperty Name="Uploader" ParameterName="Uploader" Version="Current" />
+                  <ScalarProperty Name="Audio_Language" ParameterName="Audio_Language" Version="Current" />
+                  <ScalarProperty Name="Interface_Language" ParameterName="Interface_Language" Version="Current" />
+                  <ScalarProperty Name="Game_Version" ParameterName="Game_Version" Version="Current" />
+                  <ScalarProperty Name="Game_ID" ParameterName="Game_ID" Version="Current" />
+                </UpdateFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Delete_Games" FunctionName="Games_Model.Store.Delete_Games" />
+          <FunctionImportMapping FunctionImportName="Delete_Specifications" FunctionName="Games_Model.Store.Delete_Specifications" />
+          <FunctionImportMapping FunctionImportName="Insert_Games" FunctionName="Games_Model.Store.Insert_Games" />
+          <FunctionImportMapping FunctionImportName="Insert_Specifications" FunctionName="Games_Model.Store.Insert_Specifications" />
+          <FunctionImportMapping FunctionImportName="Update_Game_Images" FunctionName="Games_Model.Store.Update_Game_Images" />
+          <FunctionImportMapping FunctionImportName="Update_Games" FunctionName="Games_Model.Store.Update_Games" />
+          <FunctionImportMapping FunctionImportName="Update_Specifications" FunctionName="Games_Model.Store.Update_Specifications" />
+          <FunctionImportMapping FunctionImportName="Update_Specifications_Technical" FunctionName="Games_Model.Store.Update_Specifications_Technical" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

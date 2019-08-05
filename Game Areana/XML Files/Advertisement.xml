@@ -1,0 +1,126 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Advertisements>
+  <!--Advertisement First-->
+  <Ad1>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad1/1.jpg</ImageUrl>
+    <NavigateUrl>http://google.com</NavigateUrl>
+    <AlternateText>Please visit http://www.google.com</AlternateText>
+    <Impressions>35</Impressions>
+    <Keyword>Google</Keyword>
+  </Ad1>
+  <Ad1>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad1/2.jpg</ImageUrl>
+    <NavigateUrl>http://youtube.com</NavigateUrl>
+    <AlternateText>Please visit http://youtube.com</AlternateText>
+    <Impressions>25</Impressions>
+    <Keyword>Pragim</Keyword>
+  </Ad1>
+  <Ad1>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad1/3.jpg</ImageUrl>
+    <NavigateUrl>http://oceanofgames.com</NavigateUrl>
+    <AlternateText>Please visit http://www.Youtube.com</AlternateText>
+    <Impressions>20</Impressions>
+    <Keyword>Youtube</Keyword>
+  </Ad1>
+  <Ad1>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad1/4.jpg</ImageUrl>
+    <NavigateUrl>http://oceanofgames.com</NavigateUrl>
+    <AlternateText>Please visit http://www.Youtube.com</AlternateText>
+    <Impressions>20</Impressions>
+    <Keyword>Youtube</Keyword>
+  </Ad1>
+  <!--Advertisement Second-->
+  <Ad2>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad2/1.jpg</ImageUrl>
+    <NavigateUrl>http://google.com</NavigateUrl>
+    <AlternateText>Please visit http://www.google.com</AlternateText>
+    <Impressions>40</Impressions>
+    <Keyword>Google</Keyword>
+  </Ad2>
+  <Ad2>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad2/2.jpg</ImageUrl>
+    <NavigateUrl>http://youtube.com</NavigateUrl>
+    <AlternateText>Please visit http://youtube.com</AlternateText>
+    <Impressions>30</Impressions>
+    <Keyword>Pragim</Keyword>
+  </Ad2>
+  <Ad2>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad2/3.jpg</ImageUrl>
+    <NavigateUrl>http://oceanofgames.com</NavigateUrl>
+    <AlternateText>Please visit http://www.Youtube.com</AlternateText>
+    <Impressions>20</Impressions>
+    <Keyword>Youtube</Keyword>
+  </Ad2>
+  <Ad2>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad2/4.jpg</ImageUrl>
+    <NavigateUrl>http://oceanofgames.com</NavigateUrl>
+    <AlternateText>Please visit http://www.Youtube.com</AlternateText>
+    <Impressions>10</Impressions>
+    <Keyword>Youtube</Keyword>
+  </Ad2>
+  <!--Advertisement Third-->
+  <Ad3>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad3/1.jpg</ImageUrl>
+    <NavigateUrl>http://google.com</NavigateUrl>
+    <AlternateText>Please visit http://www.google.com</AlternateText>
+    <Impressions>30</Impressions>
+    <Keyword>Google</Keyword>
+  </Ad3>
+  <Ad3>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad3/2.jpg</ImageUrl>
+    <NavigateUrl>http://youtube.com</NavigateUrl>
+    <AlternateText>Please visit http://youtube.com</AlternateText>
+    <Impressions>30</Impressions>
+    <Keyword>Pragim</Keyword>
+  </Ad3>
+  <Ad3>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad3/3.jpg</ImageUrl>
+    <NavigateUrl>http://oceanofgames.com</NavigateUrl>
+    <AlternateText>Please visit http://www.Youtube.com</AlternateText>
+    <Impressions>20</Impressions>
+    <Keyword>Youtube</Keyword>
+  </Ad3>
+  <Ad3>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad3/4.jpg</ImageUrl>
+    <NavigateUrl>http://oceanofgames.com</NavigateUrl>
+    <AlternateText>Please visit http://www.Youtube.com</AlternateText>
+    <Impressions>20</Impressions>
+    <Keyword>Youtube</Keyword>
+  </Ad3>
+  <!--Advertisement Third-->
+  <Ad4>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad4/1.png</ImageUrl>
+    <NavigateUrl>http://google.com</NavigateUrl>
+    <AlternateText>Please visit http://www.google.com</AlternateText>
+    <Impressions>20</Impressions>
+    <Keyword>Google</Keyword>
+  </Ad4>
+  <Ad4>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad4/2.png</ImageUrl>
+    <NavigateUrl>http://youtube.com</NavigateUrl>
+    <AlternateText>Please visit http://youtube.com</AlternateText>
+    <Impressions>20</Impressions>
+    <Keyword>Pragim</Keyword>
+  </Ad4>
+  <Ad4>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad4/3.png</ImageUrl>
+    <NavigateUrl>http://oceanofgames.com</NavigateUrl>
+    <AlternateText>Please visit http://oceanofgames.com</AlternateText>
+    <Impressions>20</Impressions>
+    <Keyword>Youtube</Keyword>
+  </Ad4>
+  <Ad4>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad4/4.png</ImageUrl>
+    <NavigateUrl>http://oceanofgames.com</NavigateUrl>
+    <AlternateText>Please visit http://oceanofgames.com</AlternateText>
+    <Impressions>20</Impressions>
+    <Keyword>Youtube</Keyword>
+  </Ad4>
+  <Ad4>
+    <ImageUrl>~/XML Files/Advertisement Images/Ad4/5.png</ImageUrl>
+    <NavigateUrl>http://oceanofgames.com</NavigateUrl>
+    <AlternateText>Please visit http://www.Youtube.com</AlternateText>
+    <Impressions>20</Impressions>
+    <Keyword>Youtube</Keyword>
+  </Ad4>
+</Advertisements>

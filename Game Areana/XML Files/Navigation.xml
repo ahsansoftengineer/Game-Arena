@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Navbar>
+  <Navigations>
+    <Nav PageName="Action" Group="MD" />
+    <Nav PageName="Arcade" Group="MD" />
+    <Nav PageName="Adventure" Group="MD" />
+    <Nav PageName="Fight" Group="MD" />
+    <Nav PageName="Mystery" Group="MD" />
+    <Nav PageName="Puzzle" Group="MD" />
+    <Nav PageName="Racing" Group="LG" />
+    <Nav PageName="RPG" Group="LG" />
+    <Nav PageName="Sci Fi" Group="LG" />
+    <Nav PageName="Simulation" Group="XL" />
+    <Nav PageName="Sports" Group="XL" />
+    <Nav PageName="Strategy" Group="XL" />
+    <Nav PageName="Survival" Group="SM" />
+    <Nav PageName="Trainer" Group="SM" />
+    <Nav PageName="War" Group="SM" />
+  </Navigations>
+</Navbar>

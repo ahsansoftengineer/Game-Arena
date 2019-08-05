@@ -1,0 +1,114 @@
+/* Master Page Styles*/
+
+body {
+  background: #000;
+}
+
+.active {
+  color: cyan !important;
+  text-shadow: 1px 2px 2px black !important;
+}
+/*Navigation*/
+p {
+  text-align: justify;
+  font-size: 15px;
+}
+
+.alert li {
+  padding-left: 20px;
+  padding-top: 5px;
+  list-style: circle;
+}
+
+.servicespara {
+  float: left;
+  line-height: 50px;
+  margin-left: 15px;
+}
+
+/* Main Content Area */
+
+.dropdown-item {
+  color: #f12473;
+}
+/* Navigation Area */
+.nav-link {
+  font-size: 16px ;
+}
+/* Map */
+.mapouter {
+  text-align: right;
+  height: 410px;
+  width: 100%;
+}
+
+.gmap_canvas {
+  overflow: hidden;
+  background: none ;
+  height: 410px;
+  width: 100%;
+}
+
+.sitemaps a:hover {
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.sitemaps li {
+  list-style: none;
+  margin-left: -25px;
+}
+
+/*Navigation*/
+.nav-link {
+  font-size: 15px;
+  color: white;
+  font-weight: 400;
+  font-family: sans-serif;
+  padding-right: 20px;
+}
+
+/* Advertisement */
+.imgAdsBox {
+  margin-top: 5px ;
+  margin-bottom: 15px ;
+  height: 250px ;
+  width:100% ;
+}
+
+.imgLargeBox {
+  margin-top: 5px ;
+  margin-bottom: 15px ;
+  height: 280px ;
+  border-radius: 5px ;
+  margin:auto;
+}
+/*Category*/
+.categoryImage {
+  height: 150px ;
+  float: left ;
+  width: 200px;
+}
+.imgrelatedlink {
+  width: 100% ;
+  margin-top: 5px ;
+  margin-bottom: 5px ;
+  height: 100px ;
+  border-radius: 5px ;
+  margin:auto;
+}
+
+.image {
+  height:100%;
+  width: 100% ;
+  box-shadow: 5px 5px 5px;
+  align-self:center;
+}
+.img-thumnail{
+  height:inherit;
+  width:250px ;
+}
+
+/*Category*/
+/*Image Control*/
+
