@@ -137,6 +137,13 @@
     <Content Include="packages.config" />
     <Content Include="GameArena.Master" />
     <Content Include="Category.aspx" />
+    <Content Include="0 Index.PNG" />
+    <Content Include="1 Category.PNG" />
+    <Content Include="2 Category.PNG" />
+    <Content Include="3 Category Bootstrap.PNG" />
+    <Content Include="4 Description.PNG" />
+    <Content Include="5 Description Medium Screen.PNG" />
+    <Content Include="6 Download.PNG" />
     <Content Include="XML Files\Advertisement Images\Ad1\1.jpg" />
     <Content Include="XML Files\Advertisement Images\Ad1\4.jpg" />
     <Content Include="XML Files\Advertisement Images\Ad1\3.jpg" />
@@ -397,7 +404,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>1999</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:1999/Games</IISUrl>
+          <IISUrl>http://localhost:1999/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

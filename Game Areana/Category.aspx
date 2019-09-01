@@ -70,7 +70,7 @@
                             <asp:Literal ID="litUploadDate" runat="server"></asp:Literal>
                             <asp:Repeater ID="rptrType" OnItemDataBound="rptrType_ItemDataBound" runat="server">
                               <ItemTemplate>
-                                <asp:LinkButton ID="lbType" target="blank" OnClick="lbType_Click" CssClass="text-success" runat="server"></asp:LinkButton>
+                                <asp:LinkButton ID="lbType" OnClick="lbType_Click" CssClass="text-success" runat="server"></asp:LinkButton>
                               </ItemTemplate>
                             </asp:Repeater>
                           </h6>
