@@ -118,6 +118,7 @@ namespace Game_Areana
       {
         Response.Redirect("~/Category.aspx?Page=" + lb.Text);
       }
+
     }
 
   }
