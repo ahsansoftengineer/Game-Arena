@@ -42,15 +42,16 @@ namespace Game_Areana
                             litDevComment1.Text = game.Developer_Comment_1;
                             litDevComment2.Text = game.Developer_Comment_2;
                             litWarning.Text = game.Warnings;
+
                             //Tech Specification
                             litTechGameVersion.Text = game.Tech_Spc.Game_Version;
                             litTechInterfaceLanguage.Text = game.Tech_Spc.Interface_Language;
                             litTechAudioLanguage.Text = game.Tech_Spc.Audio_Language;
                             litTechUploader.Text = game.Tech_Spc.Uploader;
                             litTechGameFileName.Text = game.Tech_Spc.Game_File_Name;
-                            btnDownload.PostBackUrl = "~/DownLoad.aspx?Game=" + game.Tech_Spc.Game_File_Name;
                             litTechGameSize.Text = game.Tech_Spc.Game_Download_Size;
                             litTechMDSSUM.Text = game.Tech_Spc.MDSSUM;
+
                             //Minimum Specificaiton
                             litMinOS.Text = game.Min_Spc.OS;
                             litMinProcessor.Text = game.Min_Spc.Processor;
@@ -59,6 +60,7 @@ namespace Game_Areana
                             litMinDirectX.Text = game.Min_Spc.DirectX;
                             litMinStorage.Text = game.Min_Spc.Storage;
                             litMinSoundCard.Text = game.Min_Spc.Sound_Card;
+
                             //Recomended Specificaiton
                             litRecOS.Text = game.Rec_Spc.OS;
                             litRecProcessor.Text = game.Rec_Spc.Processor;
@@ -67,6 +69,7 @@ namespace Game_Areana
                             litRecDirectX.Text = game.Rec_Spc.DirectX;
                             litRecStorage.Text = game.Rec_Spc.Storage;
                             litRecSoundCard.Text = game.Rec_Spc.Sound_Card;
+
                             //Images
                             if (game.Game_Images.Large_Image_1 != null)
                                 ImgCurrentGame1.ImageUrl = "data:Image/jpg;base64," + Convert.ToBase64String(game.Game_Images.Large_Image_1);
@@ -76,6 +79,10 @@ namespace Game_Areana
                                 imgCurrentGame3.ImageUrl = "data:Image/jpg;base64," + Convert.ToBase64String(game.Game_Images.Large_Image_3);
                             if (game.Game_Images.Small_Image != null)
                                 imgCurrentGame4.ImageUrl = "data:Image/jpg;base64," + Convert.ToBase64String(game.Game_Images.Large_Image_4);
+
+                            //Download Page Redirect Button
+                            btnDownload.PostBackUrl = "~/DownLoad.aspx?Game_ID=" + game.Game_ID;
+
                             //Related Links
                             string currentType = game.Game_Type.Split(",".ToCharArray().First()).First();
                             ViewState["CurrentType"] = currentType;

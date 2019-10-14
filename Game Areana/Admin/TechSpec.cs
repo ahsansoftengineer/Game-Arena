@@ -61,7 +61,10 @@ namespace Game_Areana.Admin
               string extension = Path.GetExtension(fuGameFileName.FileName);
               Tech_spc.Game_Download_Size = ComputeFileSize(fuGameFileName.FileContent.Length);
               fuGameFileName.SaveAs(Server.MapPath("~/Games/" + txtGameID.Text + " - " + txtGameShortName.Text + extension));
-              Tech_spc.Game_File_Name = txtGameID.Text + " - " + txtGameShortName.Text + extension;
+              // Saving the File in the Website It Self 
+              // Tech_spc.Game_File_Name = txtGameID.Text + " - " + txtGameShortName.Text + extension;
+              // Modification for downloading file from Other Site
+              //Tech_spc.Game_File_Name = "https://bit.ly/2m2ohdD";
             }
             Tech_spc.Audio_Language = txtTSAudioLanguage.Text;
             Tech_spc.Game_Version = txtTSGameVersion.Text;
